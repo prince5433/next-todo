@@ -1492,3 +1492,189 @@ git push -u origin main
 ---
 
 ## Next Video → Vercel pe Deploy karna 🚀
+
+# Next.js App Deploy on Vercel — (S? Ep. ?)
+
+---
+
+## 1. Vercel kyun use karte hain?
+
+- Next.js **Vercel ne hi banaya** hai — best compatibility
+- **EC2 (AWS)** pe deploy kar sakte ho but kuch features kaam nahi karte:
+  - ❌ Image optimization
+  - ❌ CDN caching (pages fast serve nahi honge)
+- Vercel pe yeh sab **automatically** milta hai
+- **Free mein start** hota hai — personal projects aur small startups ke liye perfect
+
+---
+
+## 2. Vercel pe Deploy karne ke Steps
+
+### Step 1 — Account banao
+- [vercel.com](https://vercel.com) pe jaao
+- **Continue with GitHub** se signup karo
+
+### Step 2 — GitHub Repo Import karo
+- Dashboard pe **Import Git Repository** option aayega
+- GitHub connect karo → Repo select karo (next-todo-app)
+- Vercel automatically detect kar leta hai ki yeh Next.js project hai
+
+### Step 3 — Environment Variables add karo ⚠️
+- `.env` file Vercel pe upload nahi hoti
+- Deploy karte waqt manually add karo:
+
+```
+DB_URL = mongodb+srv://username:password@cluster.mongodb.net/todo-app
+```
+
+- **Settings → Environment Variables** mein baad mein bhi add/edit kar sakte ho
+
+### Step 4 — Deploy karo
+- **Deploy** button click karo
+- Vercel automatically build karega (~1-2 minutes)
+- Done! ✅ Ek URL milega — koi bhi duniya mein access kar sakta hai
+
+---
+
+## 3. Changes Deploy karna (Update karna)
+
+Koi bhi change karo → **main branch mein push karo** → Vercel automatically redeploy kar deta hai
+
+```bash
+git add .
+git commit -m "change app title"
+git push origin main
+```
+
+> ✅ Push hote hi Vercel mein **naya deployment automatically start** ho jaata hai
+
+---
+
+## 4. Rollback karna
+
+Agar galti se kuch deploy ho jaaye:
+
+- Vercel Dashboard → **Deployments** tab
+- Purani deployment select karo → **Instant Rollback**
+
+---
+
+## 5. Real-world Workflow (Team mein)
+
+```
+Developer → apni branch mein kaam karo
+         → Pull Request raise karo
+         → Senior/Lead review kare
+         → Main mein merge ho
+         → Auto deploy on Vercel ✅
+```
+
+> ⚠️ Production mein directly main branch pe commit mat karo — PR workflow follow karo
+
+---
+
+## 6. Custom Domain
+
+- By default URL hoga: `your-app.vercel.app`
+- Apna domain hai toh: **Settings → Domains → Add**
+- Next video mein cover hoga
+
+---
+
+## Summary
+
+| Kaam | Kaise |
+|---|---|
+| Deploy karna | GitHub repo import → env vars add → Deploy |
+| Update karna | `git push origin main` → auto redeploy |
+| Rollback | Deployments tab → Instant Rollback |
+| Env variables | Vercel Dashboard → Settings → Environment Variables |
+| Custom domain | Settings → Domains |
+
+---
+
+## Next Video → Custom Domain Connect karna 🌐
+
+# Custom Domain Connect karna — (S? Ep. ? — Deploy Section Last)
+
+---
+
+## 1. Domain kahan se kharido?
+
+- [GoDaddy](https://godaddy.com) ya koi bhi domain provider se kharido
+- Account → **My Products** → apna domain dekho
+
+---
+
+## 2. Vercel mein Domain Add karna
+
+1. Vercel Dashboard → Apna project open karo
+2. **Settings → Domains → Add Domain**
+3. Domain name daalo: `procoderlabs.com`
+4. Environment select karo:
+   - **Production** — live website ke liye ✅
+   - **Preview** — testing ke liye (production se ek step pehle)
+5. **Save** karo
+
+---
+
+## 3. DNS Records Add karna (GoDaddy mein)
+
+Vercel `Invalid Configuration` dikhayega — usse fix karne ke liye 2 DNS records add karne padte hain:
+
+### Record 1 — A Record (root domain ke liye)
+
+| Type | Name | Value |
+|---|---|---|
+| A | `@` | Vercel ka IP address (Vercel dikhata hai) |
+
+### Record 2 — CNAME Record (www ke liye)
+
+| Type | Name | Value |
+|---|---|---|
+| CNAME | `www` | Vercel ka CNAME value (Vercel dikhata hai) |
+
+> GoDaddy → **DNS Management** → **Add New Record**
+
+---
+
+## 4. Propagation Time
+
+- Official time: **24-48 hours**
+- Usually: **10-15 minutes** mein ho jaata hai
+- SSL certificate bhi automatically generate ho jaata hai (🔒 Secure)
+
+---
+
+## 5. Verify karna
+
+- Vercel Dashboard → Settings → Domains
+- **Valid Configuration** dikhne lage → sab theek hai ✅
+- Browser mein `https://yourdomain.com` kholo → 🔒 Secure hona chahiye
+
+---
+
+## Summary
+
+| Kaam | Kahan |
+|---|---|
+| Domain kharido | GoDaddy ya koi bhi provider |
+| Domain add karo | Vercel → Settings → Domains |
+| A Record add karo | GoDaddy DNS → `@` → Vercel IP |
+| CNAME Record add karo | GoDaddy DNS → `www` → Vercel CNAME |
+| SSL certificate | Automatic — kuch time mein 🔒 |
+
+---
+
+## Deploy Section Complete ✅
+
+Is section mein yeh sab seekha:
+
+- Production ke liye app prepare karna (bug fixes, env vars, Atlas)
+- Vercel pe deploy karna
+- GitHub se auto-deploy setup
+- Custom domain connect karna
+
+---
+
+## Next Section → Server Actions 🚀
